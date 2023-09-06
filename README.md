@@ -60,26 +60,42 @@ exit
 Script done on 2023-09-06 19:58:52+00:00
 [root@pam ~]# 
 ```
-Проверяем работу:
+# Проверяем работу:
 
-# Останавливаем синхронизацию времени
-nkim@nkdeb:~/otus/ohw22$ systemctl stop systemd-timesyncd.service 
-# Задаем кастомное время, чтобы была суббота
+Останавливаем синхронизацию времени
+```
+nkim@nkdeb:~/otus/ohw22$ systemctl stop systemd-timesyncd.service
+```
+
+Задаем кастомное время, чтобы была суббота
+```
 nkim@nkdeb:~/otus/ohw22$ sudo date 082712302022.00
 [sudo] password for nkim: 
 Sat 27 Aug 12:30:00 EEST 2022
-# логинимся
+```
+
+Логинимся
+```
 nkim@nkdeb:~/otus/ohw22$ ssh otus@192.168.57.10
 otus@192.168.57.10's password: 
 /usr/local/bin/login.sh failed: exit code 1
 Connection closed by 192.168.57.10 port 22
-# Скрипт login.sh не пропустил, так как суббота и юзер не состоит в группе admin
-# Пробуем пользователем otusadm
+```
+
+Скрипт login.sh не пропустил, так как суббота и юзер не состоит в группе admin
+
+Пробуем пользователем otusadm
+
+```
 nkim@nkdeb:~/otus/ohw22$ ssh otusadm@192.168.57.10
 otusadm@192.168.57.10's password: 
 Activate the web console with: systemctl enable --now cockpit.socket
 
 [otusadm@pam ~]$ logout
 Connection to 192.168.57.10 closed.
-# Успех! Возвращаю синхронизцию времени
-nkim@nkdeb:~/otus/ohw22$ systemctl start systemd-timesyncd.service 
+```
+
+Успех! Возвращаю синхронизцию времени
+```
+nkim@nkdeb:~/otus/ohw22$ systemctl start systemd-timesyncd.service
+```
